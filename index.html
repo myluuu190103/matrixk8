@@ -1,0 +1,1239 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Ký Khóa Học Thần Số Học Matrix K8</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 100px;
+        }
+
+        body {
+            font-family: 'Cambria', 'Georgia', serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            color: #111827;
+        }
+
+        :root {
+            --primary: #059669;
+            --primary-dark: #047857;
+            --secondary: #f59e0b;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 20px 60px rgba(5, 150, 105, 0.12);
+            transform: translateY(-2px);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-weight: 600;
+            padding: 16px 36px;
+            border-radius: 14px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: 0 6px 20px rgba(5, 150, 105, 0.35);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            box-shadow: 0 10px 30px rgba(5, 150, 105, 0.45);
+            transform: translateY(-3px);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-outline {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .input {
+            width: 100%;
+            padding: 16px 18px;
+            border: 2px solid #e5e7eb;
+            border-radius: 14px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #fafafa;
+            color: #111827;
+        }
+
+        .input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.08);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            border-radius: 100px;
+            font-size: 15px;
+            font-weight: 600;
+            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+            color: var(--primary-dark);
+            border: 1px solid #6ee7b7;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid #e5e7eb;
+            z-index: 9999;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .nav-link {
+            color: #4b5563;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 8px;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+            background: #f0fdf4;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            backdrop-filter: blur(8px);
+        }
+
+        .modal-overlay.show {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 32px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideUp 0.4s ease;
+        }
+
+        .spinner {
+            border: 3px solid rgba(5, 150, 105, 0.1);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        .accordion-item {
+            margin-bottom: 12px;
+        }
+
+        .accordion-header {
+            width: 100%;
+            padding: 20px 24px;
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .accordion-header:hover {
+            border-color: var(--primary);
+            background: #f0fdf4;
+        }
+
+        .accordion-header.active {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, #f0fdf4, #d1fae5);
+        }
+
+        .accordion-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-top: none;
+            border-radius: 0 0 14px 14px;
+            margin-top: -2px;
+        }
+
+        .accordion-body.active {
+            max-height: 500px;
+            border-color: var(--primary);
+        }
+
+        .accordion-arrow {
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .accordion-arrow.active {
+            transform: rotate(180deg);
+        }
+
+        /* Default styles for countdown (desktop/larger screens) */
+        .countdown-container {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 3px solid #f59e0b;
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 24px rgba(245, 158, 11, 0.2);
+        }
+
+        .countdown-timer {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap; /* Allows wrapping to multiple rows on larger screens */
+        }
+
+        .countdown-item {
+            background: white;
+            border-radius: 12px;
+            padding: 16px 20px;
+            min-width: 80px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .countdown-value {
+            font-size: 32px;
+            font-weight: 900;
+            color: #ea580c;
+            display: block;
+            line-height: 1;
+        }
+
+        .countdown-label {
+            font-size: 12px;
+            color: #78350f;
+            margin-top: 8px;
+            font-weight: 600;
+        }
+
+        .price-display {
+            font-size: 28px;
+            font-weight: 900;
+            color: #059669;
+        }
+
+        .original-price {
+            font-size: 20px;
+            color: #9ca3af;
+            text-decoration: line-through;
+        }
+
+        .discount-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 700;
+            margin-left: 12px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 640px) {
+            .modal-content {
+                padding: 24px;
+            }
+            .nav-links {
+                display: none;
+            }
+            /* Start of modifications for mobile countdown */
+            .countdown-container {
+                padding: 16px; /* Reduce overall padding for smaller screens */
+                margin-bottom: 16px;
+            }
+            .countdown-timer {
+                flex-wrap: nowrap; /* Force items to stay on a single line */
+                gap: 4px; /* Minimize gap between items */
+                overflow-x: auto; /* Add horizontal scroll if content overflows (fallback) */
+                justify-content: space-between; /* Distribute items evenly */
+            }
+            .countdown-item {
+                padding: 8px 4px; /* Reduce padding significantly to shrink size */
+                min-width: unset; /* Remove minimum width constraint */
+                flex-basis: 0; /* Allow flexible width based on content and available space */
+                flex-grow: 1; /* Allow items to grow to fill available space */
+                flex-shrink: 1; /* Allow items to shrink if space is tight */
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); /* Slightly smaller shadow */
+            }
+            .countdown-value {
+                font-size: 20px; /* Reduce font size for numbers */
+            }
+            .countdown-label {
+                font-size: 9px; /* Reduce font size for labels */
+                margin-top: 4px; /* Adjust margin for labels */
+            }
+            /* End of modifications for mobile countdown */
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+            <div class="flex items-center justify-between">
+               <a href="#hero" class="flex items-center gap-3"> <!-- Thêm class 'flex items-center gap-3' để logo và chữ căn giữa và có khoảng cách -->
+                    <img src="https://res.cloudinary.com/dn2tbqdr2/image/upload/v1762737089/BELI_TSH_TT_2025_1_g8cbbn.png" alt="Beli" class="h-10 sm:h-14 object-contain">
+                    <span class="text-[27px] sm:text-2xl font-bold text-gray-800">MATRIX K8</span> 
+      
+                </a>
+                
+                <div class="hidden md:flex items-center gap-2">
+                    <a href="#hero" class="nav-link">Giới thiệu</a>
+                    <a href="#team" class="nav-link">Ban tổ chức</a>
+                    <a href="#course-info" class="nav-link">Thông tin khóa học</a>
+                    <a href="#timeline" class="nav-link">Lịch trình học</a>
+                    <button onclick="scrollToRegistration()" class="btn btn-primary ml-4">
+                        Đăng ký ngay
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <button onclick="scrollToRegistration()" class="btn btn-primary md:hidden">
+                    Đăng ký
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="pt-32 pb-12 sm:pb-20 px-4 sm:px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12">
+                <div class="badge mb-6 mx-auto">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                    </svg>
+                    Khóa học Thần Số Học
+                </div>
+
+                <div class="bg-gradient-to-r from-emerald-100 to-green-100 border-2 border-emerald-300 rounded-2xl p-6 mb-8 max-w-4xl mx-auto">
+                    <p class="text-lg text-gray-800 leading-relaxed mb-3">
+                         Chúc mừng anh chị đã ra <strong class="text-emerald-700">QUYẾT ĐỊNH</strong> tham gia các khóa học để <strong class="text-emerald-700">CHUYỂN HÓA</strong> và <strong class="text-emerald-700">VUN BỒI</strong> cho chính mình.
+                    </p>
+                    <p class="text-base text-gray-700">
+                        Anh chị hoan hỉ chọn khóa học theo tư vấn của BTC đã hỗ trợ thông tin cho mình.
+                    </p>
+                </div>
+                
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-black mb-6 leading-tight">
+                    <span class="gradient-text">Thức Tỉnh Cùng<br>Thần Số Matrix K8</span>
+                </h1>
+                <p class="text-xl sm:text-2xl text-gray-700 max-w-3xl mx-auto mb-4">
+                    Ma Trận Tâm Lý - Khám phá sâu sắc về bản thân và vận mệnh
+                </p>
+                <p class="text-lg text-gray-600 mb-8">
+                    Khai giảng: <strong class="text-emerald-600">22/12/2025</strong>
+                </p>
+
+                <button onclick="scrollToRegistration()" class="btn btn-primary text-lg px-12 py-5">
+                    Đăng ký ngay
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Course Info Cards -->
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="card p-6 text-center">
+                    <div class="text-4xl mb-4">📅</div>
+                    <h3 class="font-bold text-lg mb-2">Lịch học linh hoạt</h3>
+                    <p class="text-gray-600 text-sm">Sáng T2 & T6 (4:30-6:30)<br>Tối T4 (19:30-22:30)</p>
+                </div>
+                <div class="card p-6 text-center">
+                    <div class="text-4xl mb-4">💻</div>
+                    <h3 class="font-bold text-lg mb-2">Học online</h3>
+                    <p class="text-gray-600 text-sm">Học qua Zoom<br>Thoải mái mọi nơi</p>
+                </div>
+                <div class="card p-6 text-center">
+                    <div class="text-4xl mb-4">⏰</div>
+                    <h3 class="font-bold text-lg mb-2">Thời lượng</h3>
+                    <p class="text-gray-600 text-sm">1 - 1,5 tháng<br>Học chuyên sâu, tập trung</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="py-12 sm:py-20 px-4 sm:px-6 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12">
+                <div class="badge mb-6 mx-auto">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                    Ban Tổ Chức
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-black mb-6 gradient-text">Đội Ngũ Giảng Dạy & Hỗ Trợ</h2>
+              
+            </div>
+
+            <div class="card overflow-hidden">
+                <img src="https://res.cloudinary.com/dn2tbqdr2/image/upload/v1762737150/BELI_TSH_TT_2025_eryott.jpg" alt="Ban Tổ Chức" class="w-full h-auto object-cover">
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Information -->
+    <section id="course-info" class="py-12 sm:py-20 px-4 sm:px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12">
+                <div class="badge mb-6 mx-auto">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    Thông Tin Khóa Học
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-black mb-6 gradient-text">Chi Tiết Khóa Học Matrix K8</h2>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+                <div class="card p-8">
+                    <h3 class="text-2xl font-black mb-6 gradient-text">Học Phí & Ưu Đãi</h3>
+                    <div class="space-y-4 text-gray-700">
+                        <div class="flex items-start gap-3">
+                            <span class="text-emerald-600 text-2xl">✓</span>
+                            <div>
+                                <strong>Học phí niêm yết:</strong> <span class="line-through text-gray-500">5.000.000 VNĐ</span>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="text-emerald-600 text-2xl">✓</span>
+                            <div>
+                                <strong>Học phí gieo duyên:</strong> <span class="text-2xl font-bold text-emerald-600">2.860.000 VNĐ</span>
+                                <span class="ml-2 text-sm bg-red-100 text-red-700 px-2 py-1 rounded-full font-bold">GIẢM 43%</span>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 bg-purple-50 -mx-4 px-4 py-3 rounded-lg">
+                            <span class="text-purple-600 text-2xl">★</span>
+                            <div>
+                                <strong class="text-purple-800">Đăng ký nhóm 3 người:</strong> Mỗi người chỉ <span class="text-xl font-bold text-purple-700">2.160.000 VNĐ</span>
+                                <p class="text-sm text-purple-600 mt-1">(Giảm thêm 700k/người - Tổng 3 người: 6.480.000 VNĐ)</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="text-emerald-600 text-2xl">✓</span>
+                            <div>
+                                <strong>Hình thức:</strong> Học online qua Zoom
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="text-emerald-600 text-2xl">✓</span>
+                            <div>
+                                <strong>Nội dung:</strong> Ma Trận Tâm Lý (Matrix) Cơ Bản
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 bg-amber-50 -mx-4 px-4 py-3 rounded-lg">
+                            <span class="text-amber-600 text-2xl">★</span>
+                            <div>
+                                <strong class="text-amber-800">Đặc biệt:</strong> Khóa học rất linh hoạt thời gian với <strong>Video xem lại trong vòng 03 tháng</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="card p-8 bg-gradient-to-br from-emerald-50 to-green-50 border-2 border-emerald-200">
+                        <h3 class="text-xl font-bold mb-4 text-emerald-800">🎁 Chính Sách Bảo Lưu</h3>
+                        <ul class="space-y-2 text-sm text-gray-700">
+                            <li>• Được bảo lưu 1 lần đến khóa tiếp theo</li>
+                            <li>• Sau 1/2 hành trình chỉ bảo lưu, không hoàn lại</li>
+                            <li>• Báo BTC sau khai giảng 2 tuần</li>
+                        </ul>
+                    </div>
+
+                    <div class="card p-6 bg-blue-50 border-2 border-blue-200">
+                        <div class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
+                            </svg>
+                            <div class="text-sm">
+                                <p class="font-bold text-blue-900 mb-1">Cần hỗ trợ?</p>
+                                <p class="text-blue-800">Zalo: <strong>0942858931</strong> (Minh Hiền)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <button onclick="scrollToRegistration()" class="btn btn-primary text-lg px-12 py-5">
+                    Đăng ký ngay
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section id="timeline" class="py-12 sm:py-20 px-4 sm:px-6 bg-white">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-12">
+                <div class="badge mb-6 mx-auto">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                    </svg>
+                    Lịch Trình Học Tập
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-black mb-6 gradient-text">Timeline Chi Tiết Khóa Học</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    21 buổi học chuyên sâu từ cơ bản đến nâng cao về Ma Trận Tâm Lý
+                </p>
+            </div>
+
+            <div class="space-y-3">
+                <!-- Buổi 1 -->
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="flex items-center gap-4">
+                            <span class="text-2xl font-black text-emerald-600">1</span>
+                            <span class="font-bold">Ma Trận Tâm Lý Là Gì?</span>
+                        </div>
+                        <svg class="accordion-arrow w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="accordion-body">
+                        <div class="p-6 text-gray-700">
+                            <p>• Khác nhau giữa Matrix và Pythagoras</p>
+                            <p>• Cấu tạo Matrix</p>
+                            <p>• Nguyên tắc xử lý Matrix</p>
+                        </div>
+                    </div>
+                </div>
+
+                              <!-- Buổi 2 -->
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="flex items-center gap-4">
+                            <span class="text-2xl font-black text-emerald-600">2</span>
+                            <span class="font-bold">Phạm Vi Ổn Định & Chướng Ngại 3</span>
+                        </div>
+                        <svg class="accordion-arrow w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="accordion-body">
+                        <div class="p-6 text-gray-700">
+                            <p>Tìm hiểu về phạm vi ổn định và các chướng ngại liên quan đến số 3</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buổi 3 -->
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="flex items-center gap-4">
+                            <span class="text-2xl font-black text-emerald-600">3</span>
+                            <span class="font-bold">Chướng Ngại 333, 3333, Không Có 3</span>
+                        </div>
+                        <svg class="accordion-arrow w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="accordion-body">
+                        <div class="p-6 text-gray-700">
+                            <p>Phân tích chuyên sâu về các trường hợp đặc biệt với số 3</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buổi 4 -->
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="flex items-center gap-4">
+                            <span class="text-2xl font-black text-emerald-600">4</span>
+                            <span class="font-bold">Chướng Ngại Tâm Lý 6, 66, 666</span>
+                        </div>
+                        <svg class="accordion-arrow w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="accordion-body">
+                        <div class="p-6 text-gray-700">
+                            <p>Hiểu rõ về chướng ngại tâm lý liên quan đến số 6</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buổi 5 -->
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="flex items-center gap-4">
+                            <span class="text-2xl font-black text-emerald-600">5</span>
+                            <span class="font-bold">Chướng Ngại 9 & 99</span>
+                        </div>
+                        <svg class="accordion-arrow w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="accordion-body">
+                        <div class="p-6 text-gray-700">
+                            <p>Các chướng ngại liên quan đến số 9 và 99</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buổi 6 -->
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="flex items-center gap-4">
+                            <span class="text-2xl font-black text-emerald-600">6</span>
+                            <span class="font-bold">Chướng Ngại Số 999 & 9999</span>
+                        </div>
+                        <svg class="accordion-arrow w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="accordion-body">
+                        <div class="p-6 text-gray-700">
+                            <p>Phân tích các trường hợp đặc biệt với số 999 và 9999</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buổi 7 -->
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="flex items-center gap-4">
+                            <span class="text-2xl font-black text-emerald-600">7</span>
+                            <span class="font-bold">Phạm Vi Quan Tâm</span>
+                        </div>
+                        <svg class="accordion-arrow w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="accordion-body">
+                        <div class="p-6 text-gray-700">
+                            <p>Tìm hiểu về phạm vi quan tâm trong Ma Trận Tâm Lý</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buổi 8 -->
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="flex items-center gap-4">
+                            <span class="text-2xl font-black text-emerald-600">8</span>
+                            <span class="font-bold">Chướng Ngại 2, 22</span>
+                        </div>
+                        <svg class="accordion-arrow w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="accordion-body">
+                        <div class="p-6 text-gray-700">
+                            <p>Các chướng ngại liên quan đến số 2 và 22</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buổi 9 -->
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="flex items-center gap-4">
+                            <span class="text-2xl font-black text-emerald-600">9</span>
+                            <span class="font-bold">Chướng Ngại 222 & Từ 4 Số 2 Trở Lên</span>
+                        </div>
+                        <svg class="accordion-arrow w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="accordion-body">
+                        <div class="p-6 text-gray-700">
+                            <p>Phân tích chuyên sâu về số 2 xuất hiện nhiều lần</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buổi 10 -->
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="flex items-center gap-4">
+                            <span class="text-2xl font-black text-emerald-600">10</span>
+                            <span class="font-bold">Ô Số 5 & Chướng Ngại 5</span>
+                        </div>
+                        <svg class="accordion-arrow w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="accordion-body">
+                        <div class="p-6 text-gray-700">
+                            <p>Tìm hiểu về ô số 5 và các chướng ngại liên quan</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buổi 11 -->
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="flex items-center gap-4">
+                            <span class="text-2xl font-black text-emerald-600">11</span>
+                            <span class="font-bold">Chướng Ngại 55, 555, Không Có 5</span>
+                        </div>
+                        <svg class="accordion-arrow w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="accordion-body">
+                        <div class="p-6 text-gray-700">
+                            <p>Phân tích các trường hợp đặc biệt với số 5</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buổi 12 -->
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="flex items-center gap-4">
+                            <span class="text-2xl font-black text-emerald-600">12</span>
+                            <span class="font-bold">Ô Số 8 & Chướng Ngại 8</span>
+                        </div>
+                        <svg class="accordion-arrow w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="accordion-body">
+                        <div class="p-6 text-gray-700">
+                            <p>Tìm hiểu về ô số 8 và các chướng ngại liên quan</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buổi 13 -->
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="flex items-center gap-4">
+                            <span class="text-2xl font-black text-emerald-600">13</span>
+                            <span class="font-bold">Chướng Ngại 88, 888, Không Có 8</span>
+                        </div>
+                        <svg class="accordion-arrow w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="accordion-body">
+                        <div class="p-6 text-gray-700">
+                            <p>Phân tích các trường hợp đặc biệt với số 8</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buổi 14 -->
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="flex items-center gap-4">
+                            <span class="text-2xl font-black text-emerald-600">14</span>
+                            <span class="font-bold">Tương Quan Giữa 2 Và 8</span>
+                        </div>
+                        <svg class="accordion-arrow w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="accordion-body">
+                        <div class="p-6 text-gray-700">
+                            <p>Mối liên hệ và tương quan giữa số 2 và số 8</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buổi 15 -->
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="flex items-center gap-4">
+                            <span class="text-2xl font-black text-emerald-600">15</span>
+                            <span class="font-bold">Phạm Vi Bền Bỉ 147</span>
+                        </div>
+                        <svg class="accordion-arrow w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="accordion-body">
+                        <div class="p-6 text-gray-700">
+                            <p>Tìm hiểu về phạm vi bền bỉ trong Ma Trận Tâm Lý</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buổi 16 -->
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="flex items-center gap-4">
+                            <span class="text-2xl font-black text-emerald-600">16</span>
+                            <span class="font-bold">Chướng Ngại Số 1</span>
+                        </div>
+                        <svg class="accordion-arrow w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="accordion-body">
+                        <div class="p-6 text-gray-700">
+                            <p>Các chướng ngại liên quan đến số 1</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buổi 17 -->
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="flex items-center gap-4">
+                            <span class="text-2xl font-black text-emerald-600">17</span>
+                            <span class="font-bold">Chướng Ngại Ô Số 1 & 4</span>
+                        </div>
+                        <svg class="accordion-arrow w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="accordion-body">
+                        <div class="p-6 text-gray-700">
+                            <p>Mối liên hệ giữa ô số 1 và 4 trong chướng ngại</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buổi 18 -->
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="flex items-center gap-4">
+                            <span class="text-2xl font-black text-emerald-600">18</span>
+                            <span class="font-bold">Chướng Ngại Ô Số 4</span>
+                        </div>
+                        <svg class="accordion-arrow w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="accordion-body">
+                        <div class="p-6 text-gray-700">
+                            <p>Phân tích chuyên sâu về ô số 4</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buổi 19 -->
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="flex items-center gap-4">
+                            <span class="text-2xl font-black text-emerald-600">19</span>
+                            <span class="font-bold">Chướng Ngại Ô Số 7</span>
+                        </div>
+                        <svg class="accordion-arrow w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="accordion-body">
+                        <div class="p-6 text-gray-700">
+                            <p>Phân tích chuyên sâu về ô số 7</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buổi 20-21 -->
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="flex items-center gap-4">
+                            <span class="text-2xl font-black text-emerald-600">20-21</span>
+                            <span class="font-bold">Hỏi Đáp Matrix Từng Cá Nhân & Bế Giảng</span>
+                        </div>
+                        <svg class="accordion-arrow w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="accordion-body">
+                        <div class="p-6 text-gray-700">
+                            <p>• Giải đáp thắc mắc cá nhân về Ma Trận</p>
+                            <p>• Tổng kết và bế giảng khóa học</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          
+                <!-- Continue with other sessions... -->
+            </div>
+
+            <div class="text-center mt-12">
+                <button onclick="scrollToRegistration()" class="btn btn-primary text-lg px-12 py-5">
+                    Đăng ký ngay
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Section -->
+    <section id="registration" class="py-12 sm:py-20 px-4 sm:px-6 bg-white">
+        <div class="max-w-2xl mx-auto">
+            <div class="text-center mb-12">
+                <div class="badge mb-6 mx-auto">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                    </svg>
+                    Đăng Ký Học
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-black mb-4 gradient-text">Đăng Ký Ngay - K8</h2>
+                <p class="text-lg text-gray-600">
+                    Điền thông tin bên dưới để hoàn tất đăng ký
+                </p>
+            </div>
+
+            <div class="card p-8">
+                <!-- Countdown Timer -->
+                <div id="countdownContainer" class="countdown-container">
+                    <div class="text-center mb-4">
+                        <h3 class="text-2xl font-black text-orange-900 mb-2" id="countdownTitle">⏰ Ưu Đãi Giờ Vàng</h3>
+                        <p class="text-orange-800 font-semibold" id="countdownDesc">12h-14h ngày 10/10/2025</p>
+                    </div>
+                    <div class="countdown-timer" id="countdownTimer">
+                        <div class="countdown-item">
+                            <span class="countdown-value" id="days">00</span>
+                            <span class="countdown-label">Ngày</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span class="countdown-value" id="hours">00</span>
+                            <span class="countdown-label">Giờ</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span class="countdown-value" id="minutes">00</span>
+                            <span class="countdown-label">Phút</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span class="countdown-value" id="seconds">00</span>
+                            <span class="countdown-label">Giây</span>
+                        </div>
+                    </div>
+                </div>
+
+                <form id="registrationForm" class="space-y-5">
+                    <!-- Group Registration Option -->
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">
+                            Loại đăng ký
+                        </label>
+                        <select name="registrationType" id="registrationType" class="input" onchange="handleRegistrationTypeChange()">
+                            <option value="individual">Đăng ký cá nhân</option>
+                            <option value="group">Đăng ký nhóm 3 người (Giảm 700k/người)</option>
+                        </select>
+                    </div>
+
+                    <!-- Individual Form Fields -->
+                    <div id="individualFields">
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">
+                                Họ và tên (đầy đủ có dấu) <span class="text-red-500">*</span>
+                            </label>
+                            <input type="text" name="fullName" required class="input" placeholder="Nguyễn Văn A">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">
+                                Số điện thoại (sử dụng Zalo) <span class="text-red-500">*</span>
+                            </label>
+                            <input type="tel" name="phone" required class="input" placeholder="0912345678" pattern="[0-9]{10,11}">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">
+                                Địa chỉ Email <span class="text-red-500">*</span>
+                            </label>
+                            <input type="email" name="email" required class="input" placeholder="email@example.com">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">
+                                Ngày tháng năm sinh <span class="text-red-500">*</span>
+                            </label>
+                            <input type="date" name="birthDate" required class="input">
+                            <p class="text-xs text-gray-500 mt-1">Nếu có 2 ngày sinh, vui lòng ghi chú trong phần bên dưới</p>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">
+                                Tỉnh thành đang sinh sống <span class="text-red-500">*</span>
+                            </label>
+                            <input type="text" name="province" required class="input" list="provinceList" placeholder="Chọn hoặc nhập tỉnh/thành phố">
+                        </div>
+                    </div>
+
+                    <!-- Group Form Fields (Hidden by default) -->
+                    <div id="groupFields" style="display: none;">
+                        <!-- Person 1 -->
+                        <div class="bg-emerald-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-emerald-800 mb-3">👤 Người 1 (Người đại diện thanh toán)</h4>
+                            <div class="space-y-3">
+                                <label class="block text-sm font-bold text-gray-700">Họ và tên đầy đủ <span class="text-red-500">*</span></label>
+                                <input type="text" name="fullName1" class="input" placeholder="Nguyễn Văn A">
+                                <label class="block text-sm font-bold text-gray-700">Số điện thoại (sử dụng Zalo) <span class="text-red-500">*</span></label>
+                                <input type="tel" name="phone1" class="input" placeholder="0912345678" pattern="[0-9]{10,11}">
+                                <label class="block text-sm font-bold text-gray-700">Địa chỉ Email <span class="text-red-500">*</span></label>
+                                <input type="email" name="email1" class="input" placeholder="email@example.com">
+                                <label class="block text-sm font-bold text-gray-700">Ngày tháng năm sinh <span class="text-red-500">*</span></label>
+                                <input type="date" name="birthDate1" class="input">
+                                <label class="block text-sm font-bold text-gray-700">Tỉnh thành đang sinh sống <span class="text-red-500">*</span></label>
+                                <input type="text" name="province1" class="input" list="provinceList" placeholder="Tỉnh/Thành phố">
+                            </div>
+                        </div>
+
+                        <!-- Person 2 -->
+                        <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-blue-800 mb-3">👤 Người 2</h4>
+                            <div class="space-y-3">
+                                <label class="block text-sm font-bold text-gray-700">Họ và tên đầy đủ <span class="text-red-500">*</span></label>
+                                <input type="text" name="fullName2" class="input" placeholder="Nguyễn Văn B">
+                                <label class="block text-sm font-bold text-gray-700">Số điện thoại (sử dụng Zalo) <span class="text-red-500">*</span></label>
+                                <input type="tel" name="phone2" class="input" placeholder="0912345678" pattern="[0-9]{10,11}">
+                                <label class="block text-sm font-bold text-gray-700">Địa chỉ Email <span class="text-red-500">*</span></label>
+                                <input type="email" name="email2" class="input" placeholder="email@example.com">
+                                <label class="block text-sm font-bold text-gray-700">Ngày tháng năm sinh <span class="text-red-500">*</span></label>
+                                <input type="date" name="birthDate2" class="input">
+                                <label class="block text-sm font-bold text-gray-700">Tỉnh thành đang sinh sống <span class="text-red-500">*</span></label>
+                                <input type="text" name="province2" class="input" list="provinceList" placeholder="Tỉnh/Thành phố">
+                            </div>
+                        </div>
+
+                        <!-- Person 3 -->
+                        <div class="bg-purple-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-purple-800 mb-3">👤 Người 3</h4>
+                            <div class="space-y-3">
+                                <label class="block text-sm font-bold text-gray-700">Họ và tên đầy đủ <span class="text-red-500">*</span></label>
+                                <input type="text" name="fullName3" class="input" placeholder="Nguyễn Văn C">
+                                <label class="block text-sm font-bold text-gray-700">Số điện thoại (sử dụng Zalo) <span class="text-red-500">*</span></label>
+                                <input type="tel" name="phone3" class="input" placeholder="0912345678" pattern="[0-9]{10,11}">
+                                <label class="block text-sm font-bold text-gray-700">Địa chỉ Email <span class="text-red-500">*</span></label>
+                                <input type="email" name="email3" class="input" placeholder="email@example.com">
+                                <label class="block text-sm font-bold text-gray-700">Ngày tháng năm sinh <span class="text-red-500">*</span></label>
+                                <input type="date" name="birthDate3" class="input">
+                                <label class="block text-sm font-bold text-gray-700">Tỉnh thành đang sinh sống <span class="text-red-500">*</span></label>
+                                <input type="text" name="province3" class="input" list="provinceList" placeholder="Tỉnh/Thành phố">
+                            </div>
+                        </div>
+                    </div>
+
+                    <datalist id="provinceList">
+                        <option value="TP. Hà Nội">
+                        <option value="TP. Hồ Chí Minh">
+                        <option value="TP. Đà Nẵng">
+                        <option value="TP. Hải Phòng">
+                        <option value="TP. Cần Thơ">
+                    </datalist>
+
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">
+                            Mã giảm giá (nếu có)
+                        </label>
+                        <input type="text" name="discountCode" id="discountCode" class="input" placeholder="Nhập mã giảm giá" onchange="calculatePrice()">
+                        <p class="text-xs text-gray-500 mt-1">Bỏ qua nếu không có mã</p>
+                    </div>
+
+                    <!-- Price Display -->
+                    <div class="bg-gradient-to-r from-emerald-50 to-green-50 border-2 border-emerald-300 rounded-xl p-6">
+                        <div class="text-center">
+                            <p class="text-sm text-gray-600 mb-2">Học phí</p>
+                            <div class="flex items-center justify-center gap-3 mb-2">
+                                <span class="original-price" id="originalPrice">5.000.000 VNĐ</span>
+                                <span class="discount-badge" id="discountBadge">-43%</span>
+                            </div>
+                            <div class="price-display" id="finalPrice">2.860.000 VNĐ</div>
+                            <p class="text-xs text-gray-500 mt-2" id="priceNote">Giá gieo duyên</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">
+                            Ghi chú (nếu có)
+                        </label>
+                        <textarea name="notes" class="input" rows="3" placeholder="Ví dụ: Ngày sinh thứ 2, thông tin bổ sung..."></textarea>
+                    </div>
+
+                    <div class="bg-emerald-50 border-l-4 border-emerald-500 p-4 rounded-lg">
+                        <p class="text-sm text-emerald-900">
+                            <strong>💡 Lưu ý:</strong> Sau khi đăng ký, bạn sẽ nhận được mã QR để chuyển khoản học phí.
+                        </p>
+                        <p class="text-sm text-emerald-900 mt-2" id="groupNote" style="display: none;">
+                            <strong>👥 Đăng ký nhóm:</strong> Tổng học phí sẽ được gộp lại cho một bill. Người 1 sẽ là người đại diện thanh toán. Sau khi thanh toán, BTC sẽ liên hệ xác nhận với cả nhóm.
+                        </p>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-full text-lg py-4" id="submitBtn">
+                        <span id="btnText">Xác Nhận Đăng Ký</span>
+                        <svg id="btnIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="modal-overlay">
+        <div class="modal-content">
+            <button onclick="closeModal()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+
+            <div id="loadingState" class="text-center py-8">
+                <div class="spinner mx-auto mb-4"></div>
+                <p class="text-gray-600">Đang xử lý đăng ký...</p>
+            </div>
+
+            <div id="qrState" class="hidden text-center">
+                <div class="text-5xl mb-4">✅</div>
+                <h3 class="text-2xl font-bold mb-2">Đăng Ký Thành Công!</h3>
+                <p class="text-gray-600 mb-6">Vui lòng quét mã QR bên dưới để hoàn tất thanh toán</p>
+                
+                <div class="bg-gray-50 p-6 rounded-xl mb-6">
+                    <img id="qrImage" src="" alt="QR Code" class="mx-auto max-w-full h-auto" style="max-width: 300px;">
+                </div>
+
+                <div class="bg-blue-50 border-2 border-blue-200 rounded-xl p-4 mb-6">
+                    <p class="text-sm font-bold text-blue-900 mb-2">Thông tin chuyển khoản:</p>
+                    <p class="text-blue-800 text-sm">STK: <strong>67686868625</strong></p>
+                    <p class="text-blue-800 text-sm">Tên: <strong>TRẦN THỊ DIỆU TRINH</strong></p>
+                    <p class="text-blue-800 text-sm">Ngân hàng: <strong>MB BANK</strong></p>
+                    <p class="text-blue-800 text-sm mt-2">Nội dung: <strong id="transferContent"></strong></p>
+                    <p class="text-blue-800 text-sm">Số tiền: <strong id="transferAmount">2.860.000 VNĐ</strong></p>
+                </div>
+
+                <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded text-left mb-6">
+                    <p class="text-sm text-amber-900">
+                        <strong>⚠️ Quan trọng:</strong> Vui lòng chuyển khoản đúng nội dung để BTC xác nhận nhanh chóng!
+                    </p>
+                </div>
+
+                <button onclick="checkPaymentStatus()" class="btn btn-primary w-full" id="checkPaymentBtn">
+                    <span id="checkBtnText">Kiểm tra thanh toán</span>
+                    <svg id="checkBtnIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </button>
+                
+                <button onclick="closeModal()" class="btn btn-outline w-full mt-3 border-2">
+                    Đóng
+                </button>
+                
+                <div id="paymentStatusMsg" class="hidden mt-4 p-4 rounded-xl text-center"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 py-8 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <img src="https://res.cloudinary.com/dn2tbqdr2/image/upload/v1762737089/BELI_TSH_TT_2025_1_g8cbbn.png" alt="Beli" class="h-16 object-contain mx-auto mb-4">
+            <p class="text-xl font-bold text-gray-900 mb-2">Beli - Thần Số Học Tỉnh Thức</p>
+           
+            <p class="text-xs text-gray-500 mt-4">© 2025 Beli. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>const _0xa7fb52=_0x5775;(function(_0x42e19c,_0x453f7d){const _0x6520cc=_0x5775,_0x5d1b7c=_0x42e19c();while(!![]){try{const _0x253fb3=-parseInt(_0x6520cc(0x19f))/0x1+-parseInt(_0x6520cc(0x169))/0x2+-parseInt(_0x6520cc(0x19c))/0x3+parseInt(_0x6520cc(0x177))/0x4*(parseInt(_0x6520cc(0x187))/0x5)+parseInt(_0x6520cc(0x14d))/0x6+parseInt(_0x6520cc(0x182))/0x7+parseInt(_0x6520cc(0x155))/0x8;if(_0x253fb3===_0x453f7d)break;else _0x5d1b7c['push'](_0x5d1b7c['shift']());}catch(_0xbe0ba4){_0x5d1b7c['push'](_0x5d1b7c['shift']());}}}(_0x4af8,0xa586c));const DISCOUNT_CODES={'k24cam':0x186a0,'k24moi':0x186a0,'k24lantoa':0x493e0,'k24cammoi':0x30d40,'k24all':0x7a120,'k24lantoacam':0x61a80,'k24moilantoa':0x61a80,'csvideo':0x7a120,'csvideolantoa':0xc3500,'csvideolantoamoi':0xdbba0,'tpnk9':0xf4240,'k9':0x7a120},BASE_PRICE=0x2ba3e0,ORIGINAL_PRICE=0x4c4b40,GROUP_DISCOUNT_PER_PERSON=0xaae60,NUMBER_OF_GROUP_MEMBERS=0x3;let currentRegistration={'rowNumber':null,'phone':null,'transferContent':null,'finalPrice':null};function getCouponFromURL(){const _0x26336b=_0x5775,_0x3e1938=new URLSearchParams(window[_0x26336b(0x17b)][_0x26336b(0x197)]);return _0x3e1938['get'](_0x26336b(0x133));}window['addEventListener'](_0xa7fb52(0x127),()=>{const _0x199f20=_0xa7fb52,_0x44c924=getCouponFromURL();_0x44c924&&(document['getElementById'](_0x199f20(0x174))[_0x199f20(0x176)]=_0x44c924),handleRegistrationTypeChange(),startCountdown();});function handleRegistrationTypeChange(){const _0x12754a=_0xa7fb52,_0x5597e0=document[_0x12754a(0x153)](_0x12754a(0x190))[_0x12754a(0x176)],_0x5c06e5=document[_0x12754a(0x153)]('individualFields'),_0xa7ffd8=document['getElementById']('groupFields'),_0x2e9379=document[_0x12754a(0x153)](_0x12754a(0x15f)),_0x341fb9=_0x5c06e5[_0x12754a(0x162)](_0x12754a(0x17c)),_0x3e7997=_0xa7ffd8['querySelectorAll'](_0x12754a(0x12c));_0x5597e0===_0x12754a(0x15b)?(_0x5c06e5['style']['display']=_0x12754a(0x141),_0xa7ffd8[_0x12754a(0x132)][_0x12754a(0x191)]=_0x12754a(0x14f),_0x2e9379[_0x12754a(0x132)][_0x12754a(0x191)]=_0x12754a(0x14f),_0x341fb9['forEach'](_0x724535=>_0x724535[_0x12754a(0x12b)](_0x12754a(0x15c))),_0x3e7997[_0x12754a(0x179)](_0xc1c680=>_0xc1c680['setAttribute'](_0x12754a(0x15c),_0x12754a(0x15c)))):(_0x5c06e5[_0x12754a(0x132)][_0x12754a(0x191)]=_0x12754a(0x14f),_0xa7ffd8[_0x12754a(0x132)][_0x12754a(0x191)]=_0x12754a(0x141),_0x2e9379['style'][_0x12754a(0x191)]=_0x12754a(0x141),_0x341fb9[_0x12754a(0x179)](_0x199f85=>_0x199f85[_0x12754a(0x131)]('required',_0x12754a(0x15c))),_0x3e7997[_0x12754a(0x179)](_0x1960a3=>_0x1960a3[_0x12754a(0x12b)](_0x12754a(0x15c)))),calculatePrice();}function calculatePrice(){const _0x56f66f=_0xa7fb52,_0x132520=document[_0x56f66f(0x153)](_0x56f66f(0x190))['value'],_0x568e28=document['getElementById'](_0x56f66f(0x174))[_0x56f66f(0x176)][_0x56f66f(0x188)]()['trim']();let _0x335438,_0x14e60f,_0x520a1a,_0x28867c=0x0;if(_0x132520===_0x56f66f(0x14b))_0x335438=BASE_PRICE,_0x14e60f=ORIGINAL_PRICE,_0x520a1a=_0x56f66f(0x180),_0x28867c=ORIGINAL_PRICE-BASE_PRICE;else{const _0x1326a9=BASE_PRICE-GROUP_DISCOUNT_PER_PERSON;_0x335438=_0x1326a9*NUMBER_OF_GROUP_MEMBERS,_0x14e60f=ORIGINAL_PRICE*NUMBER_OF_GROUP_MEMBERS,_0x520a1a=_0x56f66f(0x184)+NUMBER_OF_GROUP_MEMBERS+_0x56f66f(0x164),_0x28867c=_0x14e60f-_0x335438;}if(_0x568e28&&DISCOUNT_CODES[_0x568e28]){const _0x36ef03=DISCOUNT_CODES[_0x568e28];_0x335438-=_0x36ef03,_0x28867c+=_0x36ef03,_0x520a1a+='\x20+\x20Mã\x20giảm\x20giá';}if(_0x335438<0x0)_0x335438=0x0;const _0x44da6b=Math[_0x56f66f(0x13e)](_0x28867c/_0x14e60f*0x64);return document['getElementById'](_0x56f66f(0x165))[_0x56f66f(0x16b)]=_0x335438[_0x56f66f(0x138)](_0x56f66f(0x178))+_0x56f66f(0x195),document['getElementById'](_0x56f66f(0x181))[_0x56f66f(0x16b)]=_0x14e60f[_0x56f66f(0x138)](_0x56f66f(0x178))+_0x56f66f(0x195),document[_0x56f66f(0x153)](_0x56f66f(0x144))[_0x56f66f(0x16b)]='-'+_0x44da6b+'%',document['getElementById'](_0x56f66f(0x13a))['textContent']=_0x520a1a,_0x335438;}function startCountdown(){const _0x3467a7=_0xa7fb52,_0x15dcf6=new Date(_0x3467a7(0x123))[_0x3467a7(0x149)](),_0x39685c=new Date(_0x3467a7(0x143))[_0x3467a7(0x149)]();function _0x56c5d4(){const _0x59179f=_0x3467a7,_0x161a6a=new Date()[_0x59179f(0x149)]();let _0x527259,_0x385488,_0x1ce5bc;_0x161a6a<_0x15dcf6?(_0x527259=_0x15dcf6,_0x385488=_0x59179f(0x173),_0x1ce5bc=_0x59179f(0x140)):(_0x527259=_0x39685c,_0x385488=_0x59179f(0x160),_0x1ce5bc=_0x59179f(0x16a));document[_0x59179f(0x153)](_0x59179f(0x13d))['textContent']=_0x385488,document[_0x59179f(0x153)](_0x59179f(0x183))[_0x59179f(0x16b)]=_0x1ce5bc;const _0x49bf13=_0x527259-_0x161a6a;if(_0x49bf13<0x0){document['getElementById'](_0x59179f(0x18b))[_0x59179f(0x16b)]='00',document[_0x59179f(0x153)](_0x59179f(0x18a))['textContent']='00',document[_0x59179f(0x153)](_0x59179f(0x17d))[_0x59179f(0x16b)]='00',document[_0x59179f(0x153)](_0x59179f(0x18f))['textContent']='00';return;}const _0x3f6ace=Math[_0x59179f(0x147)](_0x49bf13/(0x3e8*0x3c*0x3c*0x18)),_0x1c840b=Math[_0x59179f(0x147)](_0x49bf13%(0x3e8*0x3c*0x3c*0x18)/(0x3e8*0x3c*0x3c)),_0x433c0b=Math[_0x59179f(0x147)](_0x49bf13%(0x3e8*0x3c*0x3c)/(0x3e8*0x3c)),_0x3f43d2=Math[_0x59179f(0x147)](_0x49bf13%(0x3e8*0x3c)/0x3e8);document['getElementById'](_0x59179f(0x18b))['textContent']=String(_0x3f6ace)[_0x59179f(0x13c)](0x2,'0'),document[_0x59179f(0x153)](_0x59179f(0x18a))[_0x59179f(0x16b)]=String(_0x1c840b)[_0x59179f(0x13c)](0x2,'0'),document[_0x59179f(0x153)](_0x59179f(0x17d))['textContent']=String(_0x433c0b)[_0x59179f(0x13c)](0x2,'0'),document[_0x59179f(0x153)](_0x59179f(0x18f))['textContent']=String(_0x3f43d2)['padStart'](0x2,'0');}_0x56c5d4(),setInterval(_0x56c5d4,0x3e8);}function toggleAccordion(_0x38fbee){const _0x2d0854=_0xa7fb52,_0x5f2a43=_0x38fbee['nextElementSibling'],_0x318975=_0x38fbee[_0x2d0854(0x19d)](_0x2d0854(0x19a)),_0x1db459=_0x5f2a43[_0x2d0854(0x18e)][_0x2d0854(0x148)](_0x2d0854(0x128));document[_0x2d0854(0x162)](_0x2d0854(0x19b))[_0x2d0854(0x179)](_0x24c370=>{const _0x562a27=_0x2d0854;_0x24c370[_0x562a27(0x18e)][_0x562a27(0x158)](_0x562a27(0x128));}),document[_0x2d0854(0x162)](_0x2d0854(0x1a4))[_0x2d0854(0x179)](_0x5925b3=>{const _0x3ec82a=_0x2d0854;_0x5925b3[_0x3ec82a(0x18e)]['remove']('active');}),document['querySelectorAll'](_0x2d0854(0x19a))[_0x2d0854(0x179)](_0x425f8b=>{const _0x3787be=_0x2d0854;_0x425f8b[_0x3787be(0x18e)]['remove'](_0x3787be(0x128));}),!_0x1db459&&(_0x5f2a43[_0x2d0854(0x18e)][_0x2d0854(0x151)](_0x2d0854(0x128)),_0x38fbee[_0x2d0854(0x18e)][_0x2d0854(0x151)](_0x2d0854(0x128)),_0x318975[_0x2d0854(0x18e)][_0x2d0854(0x151)]('active'));}function scrollToRegistration(){const _0x5a7f41=_0xa7fb52;document[_0x5a7f41(0x153)]('registration')[_0x5a7f41(0x19e)]({'behavior':_0x5a7f41(0x186)});}window[_0xa7fb52(0x14e)]('scroll',()=>{const _0x225eeb=_0xa7fb52,_0x3a4389=document[_0x225eeb(0x19d)]('.navbar');window['scrollY']>0x32?_0x3a4389[_0x225eeb(0x18e)][_0x225eeb(0x151)]('scrolled'):_0x3a4389[_0x225eeb(0x18e)][_0x225eeb(0x158)]('scrolled');});const form=document[_0xa7fb52(0x153)](_0xa7fb52(0x17f)),modal=document[_0xa7fb52(0x153)](_0xa7fb52(0x193)),loadingState=document[_0xa7fb52(0x153)](_0xa7fb52(0x194)),qrState=document[_0xa7fb52(0x153)](_0xa7fb52(0x146)),submitBtn=document[_0xa7fb52(0x153)](_0xa7fb52(0x152)),btnText=document[_0xa7fb52(0x153)]('btnText'),btnIcon=document[_0xa7fb52(0x153)]('btnIcon');form['addEventListener']('submit',async _0x27cd91=>{const _0x47a8df=_0xa7fb52;_0x27cd91['preventDefault'](),submitBtn[_0x47a8df(0x168)]=!![],btnText['textContent']=_0x47a8df(0x154),btnIcon[_0x47a8df(0x167)]=_0x47a8df(0x196);const _0x42fba7=new FormData(form),_0x188240=_0x42fba7[_0x47a8df(0x1a0)](_0x47a8df(0x190));let _0x1efb50;_0x188240===_0x47a8df(0x14b)?_0x1efb50={'registrationType':_0x47a8df(0x14b),'fullName':_0x42fba7[_0x47a8df(0x1a0)](_0x47a8df(0x1a2)),'phone':_0x42fba7[_0x47a8df(0x1a0)](_0x47a8df(0x17e)),'email':_0x42fba7[_0x47a8df(0x1a0)](_0x47a8df(0x126)),'birthDate':_0x42fba7[_0x47a8df(0x1a0)](_0x47a8df(0x16f)),'province':_0x42fba7[_0x47a8df(0x1a0)]('province'),'discountCode':_0x42fba7['get'](_0x47a8df(0x174))||'','notes':_0x42fba7[_0x47a8df(0x1a0)](_0x47a8df(0x189))||''}:_0x1efb50={'registrationType':'group','person1':{'fullName':_0x42fba7[_0x47a8df(0x1a0)](_0x47a8df(0x134)),'phone':_0x42fba7[_0x47a8df(0x1a0)](_0x47a8df(0x1a5)),'email':_0x42fba7[_0x47a8df(0x1a0)](_0x47a8df(0x1a1)),'birthDate':_0x42fba7[_0x47a8df(0x1a0)](_0x47a8df(0x185)),'province':_0x42fba7['get'](_0x47a8df(0x198))},'person2':{'fullName':_0x42fba7[_0x47a8df(0x1a0)]('fullName2'),'phone':_0x42fba7['get'](_0x47a8df(0x124)),'email':_0x42fba7[_0x47a8df(0x1a0)](_0x47a8df(0x13b)),'birthDate':_0x42fba7[_0x47a8df(0x1a0)](_0x47a8df(0x157)),'province':_0x42fba7[_0x47a8df(0x1a0)]('province2')},'person3':{'fullName':_0x42fba7['get']('fullName3'),'phone':_0x42fba7[_0x47a8df(0x1a0)]('phone3'),'email':_0x42fba7[_0x47a8df(0x1a0)]('email3'),'birthDate':_0x42fba7[_0x47a8df(0x1a0)](_0x47a8df(0x15a)),'province':_0x42fba7[_0x47a8df(0x1a0)](_0x47a8df(0x156))},'discountCode':_0x42fba7[_0x47a8df(0x1a0)](_0x47a8df(0x174))||'','notes':_0x42fba7[_0x47a8df(0x1a0)](_0x47a8df(0x189))||''};try{modal['classList']['add']('show'),loadingState[_0x47a8df(0x18e)][_0x47a8df(0x158)](_0x47a8df(0x17a)),qrState[_0x47a8df(0x18e)][_0x47a8df(0x151)](_0x47a8df(0x17a));const _0x1a5bcd=await fetch(_0x47a8df(0x166),{'method':'POST','headers':{'Content-Type':_0x47a8df(0x161)},'body':JSON[_0x47a8df(0x135)](_0x1efb50)}),_0x1a2078=await _0x1a5bcd[_0x47a8df(0x139)](),_0xca84bd=parseInt(_0x1a2078[_0x47a8df(0x136)]||'0')+0x3e8,_0x9eca26=_0x188240==='individual'?_0x1efb50[_0x47a8df(0x17e)]:_0x1efb50[_0x47a8df(0x15e)][_0x47a8df(0x17e)],_0x5e75d4='K8'+_0xca84bd+'\x20'+_0x9eca26,_0x189071=calculatePrice();currentRegistration={'rowNumber':_0xca84bd,'phone':_0x9eca26,'transferContent':_0x5e75d4,'finalPrice':_0x189071};const _0xb110ab=_0x47a8df(0x15d),_0x490f51=_0x47a8df(0x1a3),_0x2bf7de='MB',_0x48808b=_0x47a8df(0x12d)+_0x2bf7de+'-'+_0xb110ab+_0x47a8df(0x159)+_0x189071+_0x47a8df(0x129)+encodeURIComponent(_0x5e75d4)+'&accountName='+encodeURIComponent(_0x490f51);document[_0x47a8df(0x153)]('qrImage')[_0x47a8df(0x137)]=_0x48808b,document[_0x47a8df(0x153)](_0x47a8df(0x1a6))[_0x47a8df(0x16b)]=_0x5e75d4,document[_0x47a8df(0x153)](_0x47a8df(0x175))['textContent']=_0x189071[_0x47a8df(0x138)](_0x47a8df(0x178))+'\x20VNĐ',loadingState['classList']['add'](_0x47a8df(0x17a)),qrState[_0x47a8df(0x18e)]['remove'](_0x47a8df(0x17a)),form[_0x47a8df(0x16e)](),handleRegistrationTypeChange();}catch(_0xbe8b44){alert(_0x47a8df(0x192)),console[_0x47a8df(0x170)](_0x47a8df(0x12f),_0xbe8b44),modal[_0x47a8df(0x18e)]['remove'](_0x47a8df(0x142));}finally{submitBtn['disabled']=![],btnText[_0x47a8df(0x16b)]=_0x47a8df(0x16c),btnIcon['innerHTML']=_0x47a8df(0x18c);}});function _0x4af8(){const _0x14ba21=['hidden','location','input[name=\x22fullName\x22],\x20input[name=\x22phone\x22],\x20input[name=\x22email\x22],\x20input[name=\x22birthDate\x22],\x20input[name=\x22province\x22]','minutes','phone','registrationForm','Giá\x20gieo\x20duyên','originalPrice','2380812rKtVqw','countdownDesc','Giá\x20nhóm\x20','birthDate1','smooth','35pvyNOs','toLowerCase','notes','hours','days','<path\x20stroke-linecap=\x22round\x22\x20stroke-linejoin=\x22round\x22\x20stroke-width=\x222\x22\x20d=\x22M13\x207l5\x205m0\x200l-5\x205m5-5H6\x22></path>','</strong></p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','classList','seconds','registrationType','display','Có\x20lỗi\x20xảy\x20ra.\x20Vui\x20lòng\x20thử\x20lại\x20hoặc\x20liên\x20hệ:\x200942858931','paymentModal','loadingState','\x20VNĐ','<div\x20class=\x22spinner\x20w-5\x20h-5\x22></div>','search','province1','click','.accordion-arrow','.accordion-body','2360391WJqnQf','querySelector','scrollIntoView','744279cUYHoh','get','email1','fullName','TRAN\x20THI\x20DIEU\x20TRINH','.accordion-header','phone1','transferContent','2025-10-10T14:00:00','phone2','className','email','DOMContentLoaded','active','&addInfo=','paymentStatusMsg','removeAttribute','input[name^=\x22fullName\x22],\x20input[name^=\x22phone\x22],\x20input[name^=\x22email\x22],\x20input[name^=\x22birthDate\x22],\x20input[name^=\x22province\x22]','https://img.vietqr.io/image/','Payment\x20check\x20error:','Error:','paid','setAttribute','style','coupon','fullName1','stringify','row','src','toLocaleString','json','priceNote','email2','padStart','countdownTitle','round','\x20VNĐ</strong></p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','Kết\x20thúc\x20vào\x2014h\x20ngày\x2010/10/2025','none','show','2025-12-22T00:00:00','discountBadge','checkPaymentBtn','qrState','floor','contains','getTime','checkBtnIcon','individual','mt-4\x20p-4\x20rounded-xl\x20text-center\x20bg-gradient-to-r\x20from-orange-50\x20to-yellow-50\x20border-2\x20border-orange-300','5562906iZFfsk','addEventListener','block','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22text-5xl\x20mb-3\x22>✅</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<h4\x20class=\x22text-xl\x20font-bold\x20text-green-800\x20mb-2\x22>Đã\x20Thanh\x20Toán\x20Thành\x20Công!</h4>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22text-green-700\x22>Cảm\x20ơn\x20bạn\x20đã\x20đăng\x20ký.\x20BTC\x20sẽ\x20liên\x20hệ\x20với\x20bạn\x20sớm\x20nhất.</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22text-sm\x20text-green-600\x20mt-2\x22>Mã\x20đăng\x20ký:\x20<strong>','add','submitBtn','getElementById','Đang\x20xử\x20lý...','8470320MSaBRi','province3','birthDate2','remove','-compact2.png?amount=','birthDate3','group','required','67686868625','person1','groupNote','🎓\x20Khai\x20Giảng\x20Khóa\x20Học','application/json','querySelectorAll','</strong></p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22text-sm\x20text-orange-600\x22>Số\x20tiền:\x20<strong>','\x20người','finalPrice','https://hook.eu1.make.com/en51rqnioz21mkwrjc5s1dxm9uey4t5d','innerHTML','disabled','1759186HPanEN','Ngày\x2022/12/2025','textContent','Xác\x20Nhận\x20Đăng\x20Ký','<path\x20stroke-linecap=\x22round\x22\x20stroke-linejoin=\x22round\x22\x20stroke-width=\x222\x22\x20d=\x22M9\x2012l2\x202\x204-4m6\x202a9\x209\x200\x2011-18\x200\x209\x209\x200\x200118\x200z\x22></path>','reset','birthDate','error','mt-4\x20p-4\x20rounded-xl\x20text-center\x20bg-gradient-to-r\x20from-red-50\x20to-pink-50\x20border-2\x20border-red-300','rowNumber','⏰\x20Ưu\x20Đãi\x20Giờ\x20Vàng','discountCode','transferAmount','value','435776ZlZSie','vi-VN','forEach'];_0x4af8=function(){return _0x14ba21;};return _0x4af8();}function closeModal(){const _0x3ba63e=_0xa7fb52;modal['classList']['remove'](_0x3ba63e(0x142));const _0x576791=document[_0x3ba63e(0x153)](_0x3ba63e(0x12a));_0x576791[_0x3ba63e(0x18e)][_0x3ba63e(0x151)](_0x3ba63e(0x17a)),_0x576791[_0x3ba63e(0x167)]='';}function _0x5775(_0x5abab2,_0x44c02b){const _0x4af8db=_0x4af8();return _0x5775=function(_0x5775fe,_0x53ef3f){_0x5775fe=_0x5775fe-0x123;let _0x1894b0=_0x4af8db[_0x5775fe];return _0x1894b0;},_0x5775(_0x5abab2,_0x44c02b);}async function checkPaymentStatus(){const _0x5a36c8=_0xa7fb52,_0x473439=document[_0x5a36c8(0x153)](_0x5a36c8(0x145)),_0x5b9d77=document['getElementById']('checkBtnText'),_0x5ae23e=document[_0x5a36c8(0x153)](_0x5a36c8(0x14a)),_0x280d46=document['getElementById'](_0x5a36c8(0x12a));_0x473439['disabled']=!![],_0x5b9d77[_0x5a36c8(0x16b)]='Đang\x20kiểm\x20tra...',_0x5ae23e[_0x5a36c8(0x167)]=_0x5a36c8(0x196);try{const _0x1e8db0=await fetch(_0x5a36c8(0x166),{'method':'POST','headers':{'Content-Type':_0x5a36c8(0x161)},'body':JSON[_0x5a36c8(0x135)]({'checkstatus':!![],'rowNumber':currentRegistration[_0x5a36c8(0x172)],'phone':currentRegistration['phone'],'transferContent':currentRegistration[_0x5a36c8(0x1a6)],'amount':currentRegistration['finalPrice']})}),_0x4306dc=await _0x1e8db0[_0x5a36c8(0x139)]();_0x280d46[_0x5a36c8(0x18e)][_0x5a36c8(0x158)](_0x5a36c8(0x17a)),_0x4306dc['status']===_0x5a36c8(0x130)?(_0x280d46[_0x5a36c8(0x125)]='mt-4\x20p-4\x20rounded-xl\x20text-center\x20bg-gradient-to-r\x20from-green-50\x20to-emerald-50\x20border-2\x20border-green-300',_0x280d46[_0x5a36c8(0x167)]=_0x5a36c8(0x150)+currentRegistration[_0x5a36c8(0x1a6)]+_0x5a36c8(0x18d)):(_0x280d46[_0x5a36c8(0x125)]=_0x5a36c8(0x14c),_0x280d46[_0x5a36c8(0x167)]='\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22text-5xl\x20mb-3\x22>⏳</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<h4\x20class=\x22text-xl\x20font-bold\x20text-orange-800\x20mb-2\x22>Chưa\x20Nhận\x20Được\x20Thanh\x20Toán</h4>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22text-orange-700\x22>Vui\x20lòng\x20kiểm\x20tra\x20lại\x20thông\x20tin\x20chuyển\x20khoản\x20hoặc\x20thử\x20lại\x20sau\x20vài\x20phút.</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22text-sm\x20text-orange-600\x20mt-2\x22>Nội\x20dung\x20CK:\x20<strong>'+currentRegistration[_0x5a36c8(0x1a6)]+_0x5a36c8(0x163)+currentRegistration[_0x5a36c8(0x165)]['toLocaleString'](_0x5a36c8(0x178))+_0x5a36c8(0x13f));}catch(_0x396388){_0x280d46[_0x5a36c8(0x18e)][_0x5a36c8(0x158)](_0x5a36c8(0x17a)),_0x280d46['className']=_0x5a36c8(0x171),_0x280d46[_0x5a36c8(0x167)]='\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22text-5xl\x20mb-3\x22>❌</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<h4\x20class=\x22text-xl\x20font-bold\x20text-red-800\x20mb-2\x22>Lỗi\x20Kiểm\x20Tra</h4>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22text-red-700\x22>Không\x20thể\x20kiểm\x20tra\x20trạng\x20thái.\x20Vui\x20lòng\x20thử\x20lại\x20hoặc\x20liên\x20hệ:\x200942858931</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20',console[_0x5a36c8(0x170)](_0x5a36c8(0x12e),_0x396388);}finally{_0x473439[_0x5a36c8(0x168)]=![],_0x5b9d77['textContent']='Kiểm\x20tra\x20lại',_0x5ae23e[_0x5a36c8(0x167)]=_0x5a36c8(0x16d);}}modal[_0xa7fb52(0x14e)](_0xa7fb52(0x199),_0x1322d4=>{_0x1322d4['target']===modal&&closeModal();}); </script>
+</body>
+</html>
